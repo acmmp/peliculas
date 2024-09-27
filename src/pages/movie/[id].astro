@@ -1,0 +1,88 @@
+---
+// movie/[id].astro
+
+
+const { id } = Astro.params;
+// Obtener detalles de la película y recomendaciones
+const movieDetails = await fetch(`/api/movie/${id}`).then(res => res.json());
+const recommendations = await fetch(`/api/movie/${id}/recommendations`).then(res => res.json());
+---
+
+<!-- Contenido de la página de detalles de la película -->
+<div class="movie-detail">
+    <h1>{movieDetails.title}</h1>
+    <img src={`https://image.tmdb.org/t/p/w500${movieDetails.poster_path}`} alt={movieDetails.title} />
+
+    <div class="movie-info">
+        <p><strong>Sinopsis:</strong> {movieDetails.overview}</p>
+        <p><strong>Fecha de lanzamiento:</strong> {movieDetails.release_date}</p>
+        <p><strong>Calificación:</strong> {movieDetails.vote_average}</p>
+    </div>
+
+    <h2>Recomendaciones</h2>
+    <ul>
+        {recommendations.map((movie: { id: number; poster_path: string; title: string }) => (
+            <li>
+                <a href={`/movie/${movie.id}`}>
+                    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+                    <p>{movie.title}</p>
+                </a>
+            </li>
+        ))}
+    </ul>
+</div>
+
+<!-- Estilos para la página -->
+<style>
+    .movie-detail {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    
+    .movie-detail img {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    
+    .movie-info {
+        margin: 20px 0;
+        text-align: left;
+    }
+    
+    .movie-info p {
+        margin: 5px 0;
+    }
+
+    h2 {
+        margin-top: 40px;
+    }
+    
+    ul {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+
+    li:hover {
+        transform: translateY(-5px);
+    }
+
+    li img {
+        width: 100%;
+    }
+</style>

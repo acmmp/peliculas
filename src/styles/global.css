@@ -1,0 +1,221 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa; /* Un color de fondo más claro */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6; /* Mejora la legibilidad */
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 3.5rem; /* Aumenté el tamaño */
+    font-weight: 800; /* Más negrita para más impacto */
+    color: #2c3e50; /* Un azul más oscuro */
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 2.2rem; /* Aumenté ligeramente el tamaño */
+    font-weight: 600;
+    color: #34495e; /* Un azul más claro */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px 40px; /* Ajusté el espaciado */
+}
+
+form input[type="text"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 15px; /* Más padding para un mejor tacto */
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ced6e0;
+    font-size: 1rem;
+    transition: border-color 0.3s; /* Añadido un efecto de transición */
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    border-color: #3498db; /* Cambia el color del borde al enfocar */
+    outline: none; /* Sin contorno */
+}
+
+form button {
+    background-color: #3498db;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Añadido efecto de transformación */
+    margin-top: 10px;
+}
+
+form button:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px); /* Eleva ligeramente el botón al pasar el ratón */
+}
+
+/* Movie List Styles */
+ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+li:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); /* Sombra más intensa al pasar el ratón */
+}
+
+li img {
+    width: 100%;
+    height: auto;
+    border-bottom: 4px solid #e1e8ed; /* Hice la línea un poco más gruesa */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Añadido efecto de transformación */
+}
+
+li img:hover {
+    opacity: 0.9;
+    transform: scale(1.05); /* Escala ligeramente la imagen al pasar el ratón */
+}
+
+li .movie-info {
+    padding: 20px;
+    text-align: center;
+}
+
+li .movie-info p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #34495e;
+    margin: 10px 0;
+}
+
+li .movie-info .release-date {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+li .rating {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #2ecc71;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.auth-buttons button {
+    background-color: #2ecc71;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Añadido efecto de transformación */
+}
+
+.auth-buttons button:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px); /* Eleva ligeramente el botón al pasar el ratón */
+}
+
+button.logout {
+    background-color: #e74c3c;
+}
+
+button.logout:hover {
+    background-color: #c0392b;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #34495e;
+    color: #fff;
+    font-size: 1rem;
+    position: relative; /* Posición relativa para efectos adicionales si es necesario */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    ul {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Ajusté para ser más responsivo */
+    }
+
+    h2 {
+        font-size: 1.8rem; /* Ajusté para ser más responsivo */
+    }
+
+    form {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem; /* Ajusté para dispositivos más pequeños */
+    }
+
+    ul {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    form button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

@@ -1,5 +1,6 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  // Configuraciones adicionales
+  output: 'static', // Asegúrate de que esto esté configurado correctamente
+});

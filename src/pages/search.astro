@@ -1,0 +1,52 @@
+---
+import { searchMovies, getGenres } from '../services/tmdb.js';
+
+const searchQuery = Astro.url.searchParams.get('query') || '';
+const selectedGenre = Astro.url.searchParams.get('genre') || '';
+const selectedYear = Astro.url.searchParams.get('year') || '';
+const selectedRating = Astro.url.searchParams.get('rating') || '';
+let searchResults = [];
+const genres = await getGenres();
+
+if (searchQuery) {
+  // Se agregó la selección de género, año y calificación a la búsqueda
+  searchResults = await searchMovies(searchQuery, selectedGenre, selectedYear, selectedRating);
+}
+---
+
+<h1>Buscar Películas</h1>
+<form method="GET" action="/search">
+  <input type="text" name="query" placeholder="Buscar películas..." value={searchQuery} />
+
+  <label for="genre">Género</label>
+  <select name="genre" id="genre">
+    <option value="">Todos</option>
+    {genres.map((genre: { id: string; name: string }) => (
+      <option value={genre.id} selected={selectedGenre === genre.id}>{genre.name}</option>
+    ))}
+  </select>
+
+  <label for="year">Año</label>
+  <input type="number" name="year" placeholder="Año de lanzamiento" value={selectedYear} />
+
+  <label for="rating">Calificación mínima</label>
+  <input type="number" name="rating" step="0.1" min="0" max="10" value={selectedRating} />
+
+  <button type="submit">Buscar</button>
+</form>
+
+{searchQuery && (
+  <>
+    <h2>Resultados para: "{searchQuery}"</h2>
+    <ul>
+      {searchResults.map((movie: { id: string; poster_path: string; title: string }) => (
+        <li>
+          <a href={`/movie/${movie.id}`}>
+            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+            <p>{movie.title}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </>
+)}
